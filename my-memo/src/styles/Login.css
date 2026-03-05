@@ -1,0 +1,27 @@
+input {
+    display: inline-block;
+    width: 150px;
+    height: 18px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 13px;
+    width: 250px;
+}
+
+.password-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+button {
+    display: flex;
+    width: 41px;
+    height: 23px;
+}
