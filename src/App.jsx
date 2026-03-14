@@ -8,9 +8,14 @@ function App() {
   return (
     <>
       <div className='App'>
-        <Header />
-        <Login />
-        <Editor />
+        <div className='leftApp'>
+          <Header />
+          <Login />
+          <Editor />
+        </div>
+        <div className='rightApp'>
+          <List />
+        </div>
       </div>
     </>
   )

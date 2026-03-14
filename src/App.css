@@ -1,3 +1,9 @@
 .App {
+    display: flex;
     transform: translateX(20%);
+    gap: 20px;
+}
+
+.rightApp {
+    margin-top: 180px;
 }

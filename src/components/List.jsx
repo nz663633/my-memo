@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Item from "./Item.jsx";
 
 const List = () => {
     const mockData = [
@@ -17,7 +18,10 @@ const List = () => {
     return (
         <>
             {mockData.map((item) => (
-                <p></p>
+                <Item
+                key={item.id} 
+                title={item.title}
+                content={item.content}/>
             ))}
         </>
     )
