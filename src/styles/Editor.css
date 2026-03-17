@@ -17,6 +17,7 @@
 
 .titleClass > input {
     width: 430px;
+    height: 24px;
 }
 
 .contentClass > textarea {
