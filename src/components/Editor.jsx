@@ -1,7 +1,7 @@
 import '../styles/Editor.css';
 import { use, useState } from 'react';
 
-const Editor = () => {
+const Editor = ({ onCreate }) => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
@@ -16,7 +16,9 @@ const Editor = () => {
     };
 
     const onBtnClick = () => {
-
+        onCreate(title, content);
+        setTitle("");
+        setContent("");
     };
 
     return (
@@ -36,7 +38,7 @@ const Editor = () => {
                 </div>
                 <button
                     type="summit"
-                    onChange={onBtnClick}>업로드</button>
+                    onClick={onBtnClick}>업로드</button>
             </div>
         </>
     )

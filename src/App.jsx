@@ -3,9 +3,10 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Editor from './components/Editor';
 import List from './components/List';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 function App() {
+  const idRef = useRef(2);
   const [mockData, setMockData] = useState([
     {
       id: 0,
@@ -18,16 +19,28 @@ function App() {
       content: '이것은 두 번째 메모입니다.'
     }
   ]);
+
+  const onCreate = (title, content) => {
+    const newMemo = {
+      id: idRef.current,
+      title,
+      content
+    };
+
+    setMockData([newMemo, ...mockData]);
+    idRef.current += 1;
+  };
+
   return (
     <>
       <div className='App'>
         <div className='leftApp'>
           <Header />
           <Login />
-          <Editor />
+          <Editor onCreate={onCreate} />
         </div>
         <div className='rightApp'>
-          <List mockData={mockData}/>
+          <List mockData={mockData} />
         </div>
       </div>
     </>
