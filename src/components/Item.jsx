@@ -1,6 +1,6 @@
 import '../styles/Item.css';
 
-const Item = ({ title, content }) => {
+const Item = ({ title, content, onDelete, id }) => {
     return (
         <>
             <div className='itemContainer'>
@@ -8,6 +8,7 @@ const Item = ({ title, content }) => {
                 <div className='contentItem'>
                     <h5>{content}</h5>
                 </div>
+                <button onClick={() => onDelete(id)}>삭제</button>
             </div>
         </>
     )
