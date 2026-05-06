@@ -1,5 +1,6 @@
 import '../styles/Login.css';
-import { useState, useNavigate } from "react";
+import Header from '../components/Header';
+import { useState } from "react";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const Login = () => {
 
     return (
         <>
+        <Header />
             <form>
                 <input
                     type="email"

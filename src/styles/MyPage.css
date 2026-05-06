@@ -1,14 +1,14 @@
-.App {
+.Page {
     display: flex;
     transform: translateX(20%);
     gap: 20px;
     align-items: flex-start;
 }
 
-.leftApp {
+.leftPage {
     margin-right: 2%;
 }
 
-.rightApp {
+.rightPage {
     margin-top: 180px;
 }
