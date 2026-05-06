@@ -1,0 +1,38 @@
+.LoginPage {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 13px;
+    width: 250px;
+}
+
+.LoginForm input {
+    display: inline-block;
+    width: 150px;
+    height: 18px;
+}
+
+.password-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.LoginForm button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 41px;
+    height: 23px;
+    cursor: pointer;
+}

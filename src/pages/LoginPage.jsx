@@ -1,5 +1,6 @@
 import '../styles/Login.css';
 import Header from '../components/Header';
+import '../styles/LoginPage.css'
 import { useState } from "react";
 
 const Login = () => {
@@ -16,20 +17,22 @@ const Login = () => {
 
     return (
         <>
-        <Header />
-            <form>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={onChangeEmail}></input>
-                <div className='password-row'>
+            <div className='LoginPage'>
+                <Header />
+                <form className='LoginForm'>
                     <input
-                        type="password"
-                        value={password}
-                        onChange={onChangePassword}></input>
-                    <button type="submit">완료</button>
-                </div>
-            </form>
+                        type="email"
+                        value={email}
+                        onChange={onChangeEmail}></input>
+                    <div className='password-row'>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={onChangePassword}></input>
+                        <button type="submit">완료</button>
+                    </div>
+                </form>
+            </div>
         </>
     )
 }
