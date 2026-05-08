@@ -1,15 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
 import Header from '../components/Header';
-import '../styles/LoginPage.css'
+import '../styles/RegisterPage.css'
+import { useState } from "react";
 
-const LoginPage = () => {
-    const navigate = useNavigate();
-
-    const navigateRegister = () => {
-        navigate('/register');
-    };
-
+const RegisterPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -19,13 +12,13 @@ const LoginPage = () => {
 
     const onChangePassword = (e) => {
         setPassword(e.target.value);
-    };
+    }
 
     return (
         <>
-            <div className='LoginPage'>
+            <div className='RegisterPage'>
                 <Header />
-                <form className='LoginForm'>
+                <form className='RegisterForm'>
                     <input
                         type="email"
                         value={email}
@@ -35,11 +28,7 @@ const LoginPage = () => {
                             type="password"
                             value={password}
                             onChange={onChangePassword}></input>
-                        <button className="submitButton" type="submit">완료</button>
-                        <button className="registerButton"
-                        type="button" onClick={navigateRegister}>
-                            회원가입
-                        </button>
+                        <button type="submit">회원가입 완료</button>
                     </div>
                 </form>
             </div>
@@ -47,4 +36,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default RegisterPage;

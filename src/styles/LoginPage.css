@@ -13,12 +13,12 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 13px;
-    width: 250px;
+    width: 280px;
 }
 
 .LoginForm input {
     display: inline-block;
-    width: 150px;
+    width: 155px;
     height: 18px;
 }
 
@@ -28,11 +28,20 @@
     gap: 3px;
 }
 
-.LoginForm button {
+.submitButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 41px;
+    width: 45px;
+    height: 23px;
+    cursor: pointer;
+}
+
+.registerButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
     height: 23px;
     cursor: pointer;
 }

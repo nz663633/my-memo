@@ -1,17 +1,25 @@
-input {
-    display: inline-block;
-    width: 150px;
-    height: 18px;
+.RegisterPage {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+    flex-direction: column;
 }
 
-form {
+.RegisterForm {
     display: flex;
     flex-direction: column;
     gap: 2px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 13px;
-    width: 250px;
+    width: 260px;
+}
+
+.RegisterForm input {
+    display: inline-block;
+    width: 155px;
+    height: 18px;
 }
 
 .password-row {
@@ -20,11 +28,11 @@ form {
     gap: 3px;
 }
 
-button {
+.RegisterForm button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 41px;
+    width: 100px;
     height: 23px;
     cursor: pointer;
 }
