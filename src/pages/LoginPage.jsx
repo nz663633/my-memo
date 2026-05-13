@@ -5,13 +5,12 @@ import '../styles/LoginPage.css'
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const navigateRegister = () => {
         navigate('/register');
     };
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
