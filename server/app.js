@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.listen(5173, () => {
+app.listen(5000, () => { // express 서버를 5000번 포트에서 실행
     console.log('server start');
 });
 
