@@ -7,10 +7,23 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { database } from './db.js';
 
 import router from './routes/auth.js';
 
 const app = express();
+
+// .env 파일을 읽어서 process.env에 등록
+dotenv.config();
+
+// Node.js <-> MySQL 연결 확인
+database.connect((err) => {
+    if (err) {
+        console.log("Database connection failed")
+    } else {
+        console.log("Database connection successful");
+    }
+});
 
 app.use(express.json());
 app.use(cors());
@@ -20,3 +33,4 @@ app.listen(5000, () => { // express 서버를 5000번 포트에서 실행
 
 // '/api/auth'요청이 오면 router(auth.js)에게 넘길 것
 app.use('/api/auth', router);
+
