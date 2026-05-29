@@ -10,6 +10,7 @@ import cors from 'cors';
 import { database } from './db.js';
 
 import router from './routes/auth.js';
+import { register } from 'module';
 
 const app = express();
 
