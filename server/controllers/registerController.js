@@ -2,10 +2,8 @@
 // 사용자가 입력한 암호 -> 그대로 저장하지 않고 암호화해서 저장
 import bcrypt from 'bcrypt';
 import { database } from '../db.js';
-import { json } from 'express';
-import { data } from 'react-router-dom';
 
-const register = async (req, res) => {
+const registerController = async (req, res) => {
     // 프론트에서 사용자로부터 입력받은 값 꺼내기
     const { nick, email, password } = req.body;
 
@@ -54,4 +52,4 @@ const register = async (req, res) => {
     // 성공 응답 서버에 보내기
 }
 
-export default register;
+export default registerController;

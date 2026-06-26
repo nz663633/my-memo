@@ -19,12 +19,12 @@ const RegisterPage = () => {
         setPassword(e.target.value);
     };
 
-    const verifyEmail = (e) => {
+    const verifyEmail = async (e) => {
         e.preventDefault(); // 페이지의 새로고침 막기(새로고침은 브라우저의 기본행동)
         // DB에 회원가입 정보를 저장하는 서버 API 주소
         // 5173 -> 화면 담당 프론트 주소
         // 5000 -> DB 담당 백엔드 주소
-        fetch('http://localhost:5000/api/auth/register', // 해당 api 주소로 닉네임, 이메일, 비밀번호 보내기
+        const response = await fetch('http://localhost:5000/api/auth/register', // 해당 api 주소로 닉네임, 이메일, 비밀번호 보내기
             {
                 body: JSON.stringify( // 서버로 보낼 실제 데이터(JSON 문자열로 변환해서 전송할 것)
                     {
@@ -33,9 +33,19 @@ const RegisterPage = () => {
                         password: password
                     }),
                 method: 'POST', // 요청방식 POST (새 데이터를 생성하기 위해)
-                headers: {'Content-Type': 'application/json'} // JSON 형식으로 데이터 보낸다고 서버에 알려줌
+                headers: { 'Content-Type': 'application/json' } // JSON 형식으로 데이터 보낸다고 서버에 알려줌
             });
-    };
+
+        if (response.status === 201) {
+            window.alert("회원가입이 완료되었습니다.");
+        } else if (response.status === 400) {
+            window.alert("입력값이 비어있습니다.");
+        } else if (response.status === 409) {
+            window.alert("이미 가입된 이메일입니다.");
+        } else if (response.status === 500) {
+            window.alert("회원가입에 실패했습니다.");
+        };
+    }
 
     return (
         <>
