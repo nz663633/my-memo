@@ -1,7 +1,7 @@
 import passport from 'passport';
 
-const loginRouter = () => {
+const loginController = () => {
    
 }
 
-export default loginRouter;
+export default loginController;

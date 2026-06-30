@@ -1,7 +1,7 @@
 // bcrypt: 비밀번호 암호화 라이브러리
 // 사용자가 입력한 암호 -> 그대로 저장하지 않고 암호화해서 저장
 import bcrypt from 'bcrypt';
-import { findUserByEmail, createUser } from '../models/userModel.js';
+import { findUserByEmail, createUser } from '../models/userModels.js';
 
 const registerController = async (req, res) => {
     // 프론트에서 사용자로부터 입력받은 값 꺼내기
