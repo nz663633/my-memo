@@ -26,7 +26,7 @@ const localStrategy = () => {
             }
         } catch (error) {
             console.log("이메일 조회 에러: ", error);
-            done(error);
+            return done(error);
         }
     }))
 };
