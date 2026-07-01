@@ -28,12 +28,36 @@ database.connect((err) => {
     }
 });
 
+// Express 요청: 
+// 브라우저 → express.json() → cookieParser() → session()
+// → passport.initialize() → passport.session() → router
+
+// 요청(Request)의 JSON 데이터를 JavaScript 객체로 변환
+// req.body를 사용할 수 있게 해주는 미들웨어
 app.use(express.json());
+
+// 브라우저가 보낸 쿠키를 읽어서 req.cookies에 저장
 app.use(cookieParser());
 
-app.use(session());
-app.use(passport.initialize());
-app.use(passport.session());
+// 사용자마다 세션을 관리하도록 미들웨어 session() 설정
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET, // 세션 쿠키가 위조되지 않았는지 확인하는 키
+    cookie: {
+        httpOnly: true, // js에서 cookie의 접근 막음(보안강화)
+        secure: false // https 적용 관련
+    }
+}));
+
+// passport 미들웨어는 항상 express session 미들웨어 바로 아래에 넣어준다
+
+// passport 인증 기능을 사용할 수 있도록 초기화
+app.use(passport.initialize()); 
+
+// 세션에 저장된 사용자 정보를 읽어 req.user에 저장
+// 로그인 상태를 유지
+app.use(passport.session()); 
 
 app.use(cors());
 app.listen(5000, () => { // express 서버를 5000번 포트에서 실행
