@@ -6,7 +6,10 @@ import { findUserByEmail } from '../models/userModels.js';
 import { Strategy as LocalStrategy } from 'passport-local';
 
 const localStrategy = () => {
+    // passport.use() 호출하면
+    // Passport는 해당 전략을 'local'이라는 이름으로 등록
     passport.use(new LocalStrategy({
+        // "local",
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: false
@@ -20,7 +23,7 @@ const localStrategy = () => {
             // email 존재 o
             const isValidPassword = await bcrypt.compare(password, exUser.password);
             if (isValidPassword) { // email과 password 일치 o
-                return done(null, exUser);
+                return done(null, exUser); // 성공 -> loginController로 넘겨줌
             } else { // email과 password 일치 x
                 return done(null, false, { message: "비밀번호가 일치하지 않습니다." });
             }
