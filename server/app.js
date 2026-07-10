@@ -52,13 +52,16 @@ app.use(session({
 // passport 미들웨어는 항상 express session 미들웨어 바로 아래에 넣어준다
 
 // passport 인증 기능을 사용할 수 있도록 초기화
-app.use(passport.initialize()); 
+app.use(passport.initialize());
 
 // 세션에 저장된 사용자 정보를 읽어 req.user에 저장
 // 로그인 상태를 유지
-app.use(passport.session()); 
+app.use(passport.session());
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // 배포시 변경해야함!!!!!!!!!!
+    credentials: true
+}));
 
 // '/api/auth'요청이 오면 router(auth.js)에게 넘길 것
 app.use('/api/auth', router);
@@ -72,6 +75,6 @@ app.use((err, req, res, next) => {
 })
 
 // express 서버를 5000번 포트에서 실행
-app.listen(5000, () => { 
+app.listen(5000, () => {
     console.log('server start');
 });

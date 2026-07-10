@@ -1,5 +1,4 @@
 // localStrategy의 결과를 받아서 처리
-
 import passport from 'passport';
 
 // next: 다음 미들웨어에게 작업을 넘겨라
