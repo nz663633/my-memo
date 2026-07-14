@@ -1,6 +1,6 @@
-// localStrategy의 결과를 받아서 처리
 import passport from 'passport';
 
+// localStrategy의 결과를 받아서 처리
 // next: 다음 미들웨어에게 작업을 넘겨라
 const loginController = (req, res, next) => {
     // 해당 요청에 대해 'local'이라는 인증 방식을 사용할 것
@@ -30,4 +30,23 @@ const loginController = (req, res, next) => {
     })(req, res, next);
 }
 
-export default loginController;
+//
+const loginCurrentState = (req, res) => {
+    // req.isAuthenticated(): Passport에서 로그인 여부를 판단하는 전용 메서드
+    // 나중에 Passport 내부 동작이 바뀌었을 때 인증 여부를 명확하게 표현가능
+    // 사용자 정보 사용할 때 -> req.user
+    if (req.isAuthenticated()) {
+        res.status(200).json({
+            "message": "로그인 상태 확인완료",
+            "user": {
+                id: req.user.id,
+                email: req.user.email,
+                nick: req.user.nick
+            }
+        });
+    } else {
+        res.status(401).json("로그인 상태 확인 불가능");
+    }
+}
+
+export { loginController, loginCurrentState };
