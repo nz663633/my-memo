@@ -5,9 +5,11 @@ import '../styles/Header.css';
 import '../styles/Editor.css';
 import '../styles/MyPage.css';
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
     const idRef = useRef(2);
+    const navigate = useNavigate();
     const [mockData, setMockData] = useState([
         {
             id: 1,
@@ -42,11 +44,28 @@ const MyPage = () => {
         setMockData(filteredData);
     };
 
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('/api/auth/logout', {
+                method: 'POST'
+            });
+
+            if (response.ok) {
+                alert("로그아웃 성공");
+                navigate('/');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <>
             <div className='Page'>
                 <div className='leftPage'>
                     <Header />
+                    <button className="logout"
+                        onClick={handleLogout}>로그아웃</button>
                     <Editor onCreate={onCreate} />
                 </div>
                 <div className='rightPage'>
@@ -54,9 +73,10 @@ const MyPage = () => {
                         mockData={mockData}
                         onDelete={onDelete} />
                 </div>
-            </div>
+            </div >
         </>
     )
 };
+
 
 export default MyPage;
