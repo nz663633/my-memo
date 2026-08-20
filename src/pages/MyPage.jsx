@@ -4,12 +4,13 @@ import List from '../components/List';
 import '../styles/Header.css';
 import '../styles/Editor.css';
 import '../styles/MyPage.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
     const idRef = useRef(2);
     const navigate = useNavigate();
+    const [nick, setNick] = useState("");
     const [mockData, setMockData] = useState([
         {
             id: 1,
@@ -59,13 +60,34 @@ const MyPage = () => {
         }
     }
 
+    // 렌더링 이후 로그인 상태 확인
+    useEffect(() => {
+        const checkLogin = async () => {
+            const response = await fetch('/api/auth/me', {
+                method: 'GET'
+            });
+
+            if (!response.ok) {
+                navigate('/');
+                return;
+            }
+            const getNick = await response.json(); // 서버에서 데이터를 꺼내옴
+            setNick(getNick.user.nick);
+            alert(`${getNick.user.nick}님 로그인 완료!`);
+        }
+        checkLogin();
+    }, []);
+
     return (
         <>
             <div className='Page'>
                 <div className='leftPage'>
                     <Header />
+                    <div className='nickAndButton'>
+                        <div>닉네임: {nick}</div>
                     <button className="logout"
                         onClick={handleLogout}>로그아웃</button>
+                    </div>
                     <Editor onCreate={onCreate} />
                 </div>
                 <div className='rightPage'>
@@ -77,6 +99,5 @@ const MyPage = () => {
         </>
     )
 };
-
 
 export default MyPage;

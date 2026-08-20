@@ -26,3 +26,9 @@
     height: 30px;
     cursor: pointer;
 }
+
+.nickAndButton {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+}
