@@ -4,35 +4,27 @@ import List from '../components/List';
 import '../styles/Header.css';
 import '../styles/Editor.css';
 import '../styles/MyPage.css';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
-    const idRef = useRef(2);
     const navigate = useNavigate();
     const [nick, setNick] = useState("");
-    const [mockData, setMockData] = useState([
-        {
-            id: 1,
-            title: '두 번째 메모',
-            content: '이것은 두 번째 메모입니다.'
-        },
-        {
-            id: 0,
-            title: '첫 메모',
-            content: '안녕하세요.'
+    const [mockData, setMockData] = useState([]);
+
+    const onCreate = async (title, content) => {
+        const response = await fetch('/api/memos', {
+            method: 'POST',
+            body: JSON.stringify({ title, content }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            return;
         }
-    ]);
-
-    const onCreate = (title, content) => {
-        const newMemo = {
-            id: idRef.current,
-            title,
-            content
-        };
-
-        setMockData([newMemo, ...mockData]);
-        idRef.current += 1;
+        const data = await response.json();
+        setMockData([data.memo, ...mockData]);
     };
 
     const onDelete = (targetId) => {
@@ -60,20 +52,33 @@ const MyPage = () => {
         }
     }
 
-    // 렌더링 이후 로그인 상태 확인
+    // 렌더링 이후 로그인 상태 확인 + 로그인 상태에서 메모 조회
     useEffect(() => {
         const checkLogin = async () => {
-            const response = await fetch('/api/auth/me', {
+            const authResponse = await fetch('/api/auth/me', {
                 method: 'GET'
             });
 
-            if (!response.ok) {
+            if (!authResponse.ok) {
                 navigate('/');
                 return;
             }
-            const getNick = await response.json(); // 서버에서 데이터를 꺼내옴
+            const getNick = await authResponse.json(); // 서버에서 데이터를 꺼내옴
             setNick(getNick.user.nick);
             alert(`${getNick.user.nick}님 로그인 완료!`);
+
+            // 메모 조회
+            const memoResponse = await fetch('/api/memos', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!memoResponse.ok) {
+                return;
+            }
+            const data = await memoResponse.json();
+            setMockData(data.memos);
         }
         checkLogin();
     }, []);
@@ -85,8 +90,8 @@ const MyPage = () => {
                     <Header />
                     <div className='nickAndButton'>
                         <div>닉네임: {nick}</div>
-                    <button className="logout"
-                        onClick={handleLogout}>로그아웃</button>
+                        <button className="logout"
+                            onClick={handleLogout}>로그아웃</button>
                     </div>
                     <Editor onCreate={onCreate} />
                 </div>

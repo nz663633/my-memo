@@ -7,6 +7,7 @@ import logoutController from '../controllers/logoutController.js';
 
 const router = express.Router();
 
+// 사용자 인증에 관한 API
 router.post('/login', loginController);
 router.post('/logout', logoutController);
 router.post('/register', registerController);

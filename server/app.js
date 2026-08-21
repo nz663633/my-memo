@@ -12,6 +12,7 @@ import passport from 'passport';
 import router from './routes/auth.js';
 import './passport/index.js';
 import session from 'express-session';
+import memoRouter from './routes/memo.js';
 
 const app = express();
 
@@ -59,12 +60,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: 'http://localhost:5173', // 배포시 변경해야함!!!!!!!!!!
+    origin: 'http://localhost:5173', // ★★★ 배포시 변경해야함!!!!!!!!!!
     credentials: true
 }));
 
 // '/api/auth'요청이 오면 router(auth.js)에게 넘길 것
 app.use('/api/auth', router);
+
+app.use('/api/memos', memoRouter);
 
 // 에러처리 미들웨어
 app.use((err, req, res, next) => {

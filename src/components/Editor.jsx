@@ -37,7 +37,6 @@ const Editor = ({ onCreate }) => {
                         onChange={onContentChange} />
                 </div>
                 <button
-                    type="summit"
                     onClick={onBtnClick}>업로드</button>
             </div>
         </>
