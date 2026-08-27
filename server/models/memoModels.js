@@ -39,3 +39,23 @@ export const getMemos = (user_id) => {
         )
     })
 }
+
+// 메모 삭제(현재 로그인한 계정이 작성한 메모 삭제)
+export const deleteMemo = (id, user_id) => {
+    const sql = `
+                DELETE FROM memo
+                WHERE id = ?
+                AND user_id = ?;
+                `;
+    return new Promise((resolve, reject) => {
+        database.query(sql, [id, user_id],
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(result);
+            }
+        )
+    })
+}

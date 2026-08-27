@@ -27,14 +27,18 @@ const MyPage = () => {
         setMockData([data.memo, ...mockData]);
     };
 
-    const onDelete = (targetId) => {
-        // 지우고자하는 targetId가 아닌 
-        // 나머지 item.id를 모아서 새로운 배열을 생성
-        const filteredData = mockData.filter((item) => {
-            return item.id !== targetId;
+    const onDelete = async (id) => {
+        const response = await fetch(`/api/memos/${id}`, {
+            method: 'DELETE'
         });
-
-        setMockData(filteredData);
+        if (response.ok) {
+            // 삭제된 메모를 제외한 새로운 배열 생성(filteredData)
+            const filteredData = mockData.filter((item) => {
+                return item.id !== id;
+            });
+            // 그 배열을 React의 상태로 저장
+            setMockData(filteredData);
+        }
     };
 
     const handleLogout = async () => {

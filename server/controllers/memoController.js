@@ -1,6 +1,6 @@
 // 사용자가 작성한 메모를 받아서 Model에 전달
 
-import { createMemo, getMemos } from "../models/memoModels.js";
+import { createMemo, getMemos, deleteMemo } from "../models/memoModels.js";
 
 const memoCreateController = async (req, res, next) => {
     try {
@@ -43,4 +43,16 @@ const memoSearchController = async (req, res, next) => {
     }
 }
 
-export { memoCreateController, memoSearchController };
+const memoDeleteController = async (req, res, next) => {
+    try {
+        await deleteMemo(req.params.id, req.user.id);
+        res.status(204).send(); // 204 코드는 응답 본문이 없어야 하는 상태 코드
+
+    }
+    catch (err) {
+        console.log(err);
+        next(err);
+    }
+}
+
+export { memoCreateController, memoSearchController, memoDeleteController };
