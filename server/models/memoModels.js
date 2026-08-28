@@ -59,3 +59,24 @@ export const deleteMemo = (id, user_id) => {
         )
     })
 }
+
+// 메모 수정(목록에 있는 메모 수정)
+export const updateMemo = (title, content, id, user_id) => {
+    const sql = `
+                UPDATE memo
+                SET title = ?, content = ?
+                WHERE id = ?
+                AND user_id = ?;
+                `;
+    return new Promise((resolve, reject) => {
+        database.query(sql, [title, content, id, user_id],
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(result);
+            }
+        )
+    })
+}

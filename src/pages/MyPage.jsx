@@ -41,6 +41,31 @@ const MyPage = () => {
         }
     };
 
+    const onUpdate = async (id, title, content) => {
+        const response = await fetch(`/api/memos/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ title, content }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            console.log(response.status);
+            return;
+        }
+        const data = await response.json(); // 서버에서 응답받은 데이터 꺼내기
+        const updatedData = mockData.map((item) => {
+            // 수정한 메모의 id와 기존의 메모 id가 같다면
+            // data.memo 반환 (memoController.js에서 반환한 수정된 메모 데이터)
+            // 그렇지 않다면 기존 메모(item)를 그대로 유지
+            return item.id === id ? data.memo : item;
+        })
+        // 수정된 메모가 반영된 배열을 React 상태로 저장
+        setMockData(updatedData);
+        // 수정 성공 여부를 Item.jsx의 handleUpdate로 전달
+        return true;
+    }
+
     const handleLogout = async () => {
         try {
             const response = await fetch('/api/auth/logout', {
@@ -102,7 +127,8 @@ const MyPage = () => {
                 <div className='rightPage'>
                     <List
                         mockData={mockData}
-                        onDelete={onDelete} />
+                        onDelete={onDelete}
+                        onUpdate={onUpdate} />
                 </div>
             </div >
         </>

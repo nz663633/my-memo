@@ -27,7 +27,16 @@
     height: 205px;
 }
 
-button {
-    width: 9.5%;
-    height: 10%;
+.Buttons {
+    display: flex;
+    gap: 5px;
 }
+
+.deleteBtn {
+    width: 9.5%;
+}
+
+.updateBtn {
+    width: 9.5%;
+}
+

@@ -1,7 +1,6 @@
-import { useState } from "react";
 import Item from "./Item.jsx";
 
-const List = ({ mockData, onDelete }) => {
+const List = ({ mockData, onDelete, onUpdate }) => {
     return (
         <>
             {mockData.map((item) => (
@@ -11,6 +10,7 @@ const List = ({ mockData, onDelete }) => {
                     title={item.title}
                     content={item.content}
                     onDelete={onDelete}
+                    onUpdate={onUpdate}
                 />
             ))}
         </>
