@@ -54,7 +54,8 @@ app.use(session({
     secret: process.env.SESSION_SECRET, // 세션 쿠키가 위조되지 않았는지 확인하는 키
     cookie: {
         httpOnly: true, // js에서 cookie의 접근 막음(보안강화)
-        secure: true // https 적용 관련
+        secure: true, // https 적용 관련
+        sameSite: 'none'
     }
 }));
 
