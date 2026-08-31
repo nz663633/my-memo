@@ -33,6 +33,11 @@ database.connect((err) => {
 // 브라우저 → express.json() → cookieParser() → session()
 // → passport.initialize() → passport.session() → router
 
+app.use(cors({
+    origin: 'https://heroic-solace-production-c68d.up.railway.app',
+    credentials: true
+}));
+
 // 요청(Request)의 JSON 데이터를 JavaScript 객체로 변환
 // req.body를 사용할 수 있게 해주는 미들웨어
 app.use(express.json());
@@ -47,7 +52,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET, // 세션 쿠키가 위조되지 않았는지 확인하는 키
     cookie: {
         httpOnly: true, // js에서 cookie의 접근 막음(보안강화)
-        secure: false // https 적용 관련
+        secure: true // https 적용 관련
     }
 }));
 
@@ -59,11 +64,6 @@ app.use(passport.initialize());
 // 세션에 저장된 사용자 정보를 읽어 req.user에 저장
 // 로그인 상태를 유지
 app.use(passport.session());
-
-app.use(cors({
-    origin: 'https://heroic-solace-production-c68d.up.railway.app',
-    credentials: true
-}));
 
 // '/api/auth'요청이 오면 router(auth.js)에게 넘길 것
 app.use('/api/auth', router);
