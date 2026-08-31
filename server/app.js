@@ -22,7 +22,8 @@ dotenv.config();
 // Node.js <-> MySQL 연결 확인
 database.connect((err) => {
     if (err) {
-        console.log("Database connection failed")
+        console.log("Database connection failed");
+        console.log(err);
     } else {
         console.log("Database connection successful");
     }
