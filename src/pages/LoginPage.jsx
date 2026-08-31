@@ -28,6 +28,12 @@ const LoginPage = () => {
                     className='LoginForm'
                     onSubmit={async (e) => {
                         e.preventDefault();
+
+                        if (!email || !password) {
+                            alert("이메일과 비밀번호를 입력하세요.");
+                            return;
+                        }
+
                         const loginRes = await fetch('/api/auth/login', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
