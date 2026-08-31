@@ -16,6 +16,8 @@ import memoRouter from './routes/memo.js';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // .env 파일을 읽어서 process.env에 등록
 dotenv.config();
 
