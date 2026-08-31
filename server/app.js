@@ -61,7 +61,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: 'http://localhost:5173', // ★★★ 배포시 변경해야함!!!!!!!!!!
+    origin: 'https://heroic-solace-production-c68d.up.railway.app',
     credentials: true
 }));
 

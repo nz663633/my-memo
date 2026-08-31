@@ -34,7 +34,7 @@ const LoginPage = () => {
                             return;
                         }
 
-                        const loginRes = await fetch('/api/auth/login', {
+                        const loginRes = await fetch('https://my-memo-production.up.railway.app/api/auth/login', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             credentials: 'include', // 쿠키를 함께 전송, 서버가 준 쿠키도 저장
@@ -71,4 +71,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default LoginPage;         

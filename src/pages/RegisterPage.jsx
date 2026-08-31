@@ -26,7 +26,7 @@ const RegisterPage = () => {
         // DB에 회원가입 정보를 저장하는 서버 API 주소
         // 5173 -> 화면 담당 프론트엔드 개발 주소
         // 5000 -> 백엔드 서버 주소
-        const response = await fetch('/api/auth/register', // 해당 api 주소로 닉네임, 이메일, 비밀번호 보내기
+        const response = await fetch('https://my-memo-production.up.railway.app/api/auth/register', // 해당 api 주소로 닉네임, 이메일, 비밀번호 보내기
             {
                 body: JSON.stringify( // 서버로 보낼 실제 데이터(JSON 문자열로 변환해서 전송할 것)
                     {

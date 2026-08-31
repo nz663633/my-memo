@@ -13,8 +13,9 @@ const MyPage = () => {
     const [mockData, setMockData] = useState([]);
 
     const onCreate = async (title, content) => {
-        const response = await fetch('/api/memos', {
+        const response = await fetch('https://my-memo-production.up.railway.app/api/memos', {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({ title, content }),
             headers: {
                 'Content-Type': 'application/json'
@@ -28,8 +29,9 @@ const MyPage = () => {
     };
 
     const onDelete = async (id) => {
-        const response = await fetch(`/api/memos/${id}`, {
-            method: 'DELETE'
+        const response = await fetch(`https://my-memo-production.up.railway.app/api/memos/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
         });
         if (response.ok) {
             // 삭제된 메모를 제외한 새로운 배열 생성(filteredData)
@@ -42,8 +44,9 @@ const MyPage = () => {
     };
 
     const onUpdate = async (id, title, content) => {
-        const response = await fetch(`/api/memos/${id}`, {
+        const response = await fetch(`https://my-memo-production.up.railway.app/api/memos/${id}`, {
             method: 'PUT',
+            credentials: 'include',
             body: JSON.stringify({ title, content }),
             headers: {
                 'Content-Type': 'application/json'
@@ -68,8 +71,9 @@ const MyPage = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('/api/auth/logout', {
-                method: 'POST'
+            const response = await fetch('https://my-memo-production.up.railway.app/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
             });
 
             if (response.ok) {
@@ -84,8 +88,9 @@ const MyPage = () => {
     // 렌더링 이후 로그인 상태 확인 + 로그인 상태에서 메모 조회
     useEffect(() => {
         const checkLogin = async () => {
-            const authResponse = await fetch('/api/auth/me', {
-                method: 'GET'
+            const authResponse = await fetch('https://my-memo-production.up.railway.app/api/auth/me', {
+                method: 'GET',
+                credentials: 'include'
             });
 
             if (!authResponse.ok) {
@@ -97,8 +102,9 @@ const MyPage = () => {
             alert(`${getNick.user.nick}님 로그인 완료!`);
 
             // 메모 조회
-            const memoResponse = await fetch('/api/memos', {
+            const memoResponse = await fetch('https://my-memo-production.up.railway.app/api/memos', {
                 method: 'GET',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 }
