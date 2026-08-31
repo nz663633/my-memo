@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import '../styles/RegisterPage.css'
 import { useState } from "react";
@@ -6,6 +7,7 @@ const RegisterPage = () => {
     const [nick, setNick] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const onChangeNick = (e) => {
         setNick(e.target.value);
@@ -22,9 +24,9 @@ const RegisterPage = () => {
     const verifyEmail = async (e) => {
         e.preventDefault(); // 페이지의 새로고침 막기(새로고침은 브라우저의 기본행동)
         // DB에 회원가입 정보를 저장하는 서버 API 주소
-        // 5173 -> 화면 담당 프론트 주소
-        // 5000 -> DB 담당 백엔드 주소
-        const response = await fetch('http://localhost:5000/api/auth/register', // 해당 api 주소로 닉네임, 이메일, 비밀번호 보내기
+        // 5173 -> 화면 담당 프론트엔드 개발 주소
+        // 5000 -> 백엔드 서버 주소
+        const response = await fetch('/api/auth/register', // 해당 api 주소로 닉네임, 이메일, 비밀번호 보내기
             {
                 body: JSON.stringify( // 서버로 보낼 실제 데이터(JSON 문자열로 변환해서 전송할 것)
                     {
@@ -38,6 +40,7 @@ const RegisterPage = () => {
 
         if (response.status === 201) {
             window.alert("회원가입이 완료되었습니다.");
+            navigate('/');
         } else if (response.status === 400) {
             window.alert("입력값이 비어있습니다.");
         } else if (response.status === 409) {
