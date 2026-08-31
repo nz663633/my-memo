@@ -78,6 +78,6 @@ app.use((err, req, res, next) => {
 })
 
 // express 서버를 5000번 포트에서 실행
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('server start');
 });
