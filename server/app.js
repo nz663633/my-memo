@@ -22,13 +22,14 @@ app.set('trust proxy', 1);
 dotenv.config();
 
 // Node.js <-> MySQL 연결 확인
-database.connect((err) => {
+database.getConnection((err, connection) => {
     if (err) {
-        console.log("Database connection failed");
-        console.log(err);
-    } else {
-        console.log("Database connection successful");
+        console.error('Database connection failed:', err);
+        return;
     }
+
+    console.log('Database connection successful');
+    connection.release();
 });
 
 // Express 요청: 
