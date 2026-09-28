@@ -29,3 +29,15 @@ A simple memo management website
 - Update memos
 - Delete memos
 - User-specific memo management
+
+---------
+
+### 프로젝트 시연
+
+![Main Page](./home.png)
+
+![Login Page](./login.png) 
+
+![Memo CRUD Demo](./memo_CRUD.gif)
+
+![Memo List](./memo.png)
